@@ -1,20 +1,19 @@
-# ⚽ Fantasy Premier League (FPL) ML Prediction Model
+# Fantasy Premier League (FPL) ML Prediction Model
 
 An end-to-end Machine Learning model and backtesting framework designed to project Fantasy Premier League (FPL) player points, evaluate fixture difficulties, and rank top picks for upcoming gameweeks.
 
 ---
 
-## 📌 Project Overview
+## Project Overview
 
 At the moment this project is an experiment, created to iterate upon the lessons learned so far from building and backtesting predictive football models. 
 
-Currently, the model does an excellent job "separating" good players from great players across the league (delivering strong monotonic calibration from quartile to quartile). Overall, the model is performing on par with the average FPL player and consensus wisdom, while providing objective data-driven projections. 
-
-> 💡 **More thoughts, design decisions, and deep-dive experiment notes can be found in [`PROJECT_LOG.md`](PROJECT_LOG.md).**
+Currently, the model does an excellent job "separating" good players from great players across the league (delivering strong monotonic calibration from quartile to quartile). So far, the model is performing on par with the average FPL player
+> **More thoughts, design decisions, and deep-dive experiment notes can be found in [`PROJECT_LOG.md`](PROJECT_LOG.md).**
 
 ---
 
-## 📊 Overview & Methodology
+## Overview & Methodology
 
 The model employs regularized **XGBoost Regressors with a Tweedie distribution objective** (`reg:tweedie`, variance power = 1.2), designed specifically for zero-inflated, right-skewed point distributions common in fantasy football.
 
@@ -24,9 +23,9 @@ The model employs regularized **XGBoost Regressors with a Tweedie distribution o
 
 ---
 
-## ⚙️ Feature Engineering
+## Feature Engineering
 
-### 🟢 Current Active Features
+### Current Active Features
 The model currently uses the following feature set across training and inference:
 
 1. **`rolling_avg_points_last_5`**: Short-term player form (5-game rolling average FPL points, shifted by 1).
@@ -39,7 +38,7 @@ The model currently uses the following feature set across training and inference
 8. **`composite_opp_difficulty`**: Blended opponent index $(0 \text{ to } 1)$ combining prior-gameweek lagged league position ($GW - 1$) and cumulative season-long expected goals allowed ($xGA$).
 9. **`was_home`**: Binary indicator for home vs. away venue advantage.
 
-### 💡 Brainstormed / Potential Future Features
+### Brainstormed / Potential Future Features
 Additional features evaluated or planned for future iterations:
 
 - **`team_xg_season_avg`**: Cumulative attacking power and chance-creation volume of the player's team.
@@ -50,7 +49,7 @@ Additional features evaluated or planned for future iterations:
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```text
 ├── Models/
@@ -72,7 +71,7 @@ Additional features evaluated or planned for future iterations:
 
 ---
 
-## 🌐 Data Sources & Acknowledgments
+## Data Sources & Acknowledgments
 
 This project utilizes historical Fantasy Premier League and Premier League underlying match data:
 
@@ -83,7 +82,7 @@ This project utilizes historical Fantasy Premier League and Premier League under
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Installation
 Clone the repository and install required dependencies:
@@ -104,9 +103,9 @@ python3 FWD_model.py
 
 ---
 
-## 📈 Evaluation Metrics
+## Evaluation Metrics
 
-We are actively testing and comparing several evaluation metrics to measure real-world performance:
+I am actively testing and comparing several evaluation metrics to measure real-world performance:
 
 - **Spearman Rank Correlation**: Evaluates relative player ranking accuracy across all active starters.
 - **NDCG & NDCG@5**: Measures the ranking quality of the highest projected recommendations.
