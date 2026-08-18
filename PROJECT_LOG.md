@@ -111,7 +111,7 @@ Fantasy Premier League points exhibit distinct distributional properties that vi
 * **Problem**: Passing multiple collinear opponent metrics (`opp_league_pos`, `team_xg`, `opp_xg_allowed`) caused tree splits to fragment, reducing the feature importance of `rolling_avg_points_last_5` from ~16% to 13.5% and lowering Spearman rank correlation from 0.25 to 0.19.
 * **Root Cause**: Gradient boosted decision trees split arbitrarily across correlated features in shallow trees, diluting the primary signal from recent player form.
 * **Fix**: Consolidated individual opponent metrics into a normalized **Composite Opponent Difficulty Index**:
-  $$\text{Composite Difficulty} = \left(\frac{\text{opp\_league\_pos}}{20.0}\right) \times 0.5 + \left(\frac{\text{opp\_xga\_season\_avg}}{2.5}\right) \times 0.5$$
+  $$\text{Composite Difficulty} = \left(\frac{\text{Opponent League Position}}{20.0}\right) \times 0.5 + \left(\frac{\text{Opponent Season xGA}}{2.5}\right) \times 0.5$$
 * **Result**: Restored `rolling_avg_points_last_5` to **19.95%** relative importance (#1 feature) and improved weekly correlation to **0.2530**.
 
 ---
